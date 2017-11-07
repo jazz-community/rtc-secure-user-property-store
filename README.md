@@ -25,17 +25,19 @@ The implementing application must somehow remember the `key` of a user as it is 
 **Example Request Body**
 ```
 {
-	"key": "gitlab.com",
+    "key": "gitlab.com",
     "token": "<this is my secure github accees token>"
 }
 ```
 
 **Response Status Code**
-| HTTP Status Code  | When |
-| 201               | The token was successfully added to the database |
-| 400               | Bad Request. Your request must have a body like the one described in _Example Request_. Make sure that it is sent along the network as `application/json` |
-| 401               | The user is not authenticated with RTC Jazz |
-| 500               | An internal server error has occured. Review the CCM log file to find more information | 
+
+ | HTTP Status Code  | When |
+ | ----------------- | ---- |
+ | 201               | The token was successfully added to the database |
+ | 400               | Bad Request. Your request must have a body like the one described in _Example Request_. Make sure that it is sent along the network as `application/json` |
+ | 401               | The user is not authenticated with RTC Jazz |
+ | 500               | An internal server error has occured. Review the CCM log file to find more information | 
 
 ### Read token from Store
 Read the token associated to the passed in `key` for the currently logged-in user.
@@ -44,11 +46,13 @@ Read the token associated to the passed in `key` for the currently logged-in use
 > GET <root>/tokenStore?key=`key`
 
 **Response Status Code**
-| HTTP Status Code  | When |
-| 200               | Found the token associated to the passed in `key`, the value is availabe in the response body (see below) |
-| 401               | The user is not authenticated with RTC Jazz |
-| 404               | The currently logged-in user has no token stored yet for the passed in `key`
-| 500               | An internal server error has occured. Review the CCM log file to find more information | 
+
+ | HTTP Status Code  | When |
+ | ----------------- | ---- | 
+ | 200               | Found the token associated to the passed in `key`, the value is availabe in the response body (see below) |
+ | 401               | The user is not authenticated with RTC Jazz |
+ | 404               | The currently logged-in user has no token stored yet for the passed in `key`
+ | 500               | An internal server error has occured. Review the CCM log file to find more information | 
 
 **Response Body**
 ```
