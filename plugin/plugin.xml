@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<!-- https://jazz.net/wiki/bin/view/Main/JAFServiceFramework -->
+<plugin>
+    <extension
+            point="com.ibm.team.repository.common.components">
+        <component
+                id="com.siemens.bt.jazz.services.PersonalTokenService"
+                name="REST service">
+            <service
+                    name="REST Service"
+                    kind="MODELLED_REST"
+                    uri="com.siemens.bt.jazz.services.PersonalTokenService.IPersonalTokenService"
+                    version="1">
+            </service>
+        </component>
+    </extension>
+    <extension
+            point="com.ibm.team.repository.service.serviceProvider">
+        <serviceProvider
+                componentId="com.siemens.bt.jazz.services.PersonalTokenService"
+                implementationClass="com.siemens.bt.jazz.services.PersonalTokenService.PersonalTokenService">
+            <provides>
+                <providedService interface="com.siemens.bt.jazz.services.PersonalTokenService.IPersonalTokenService" />
+            </provides>
+            <prerequisites>
+                <!-- https://jazz.net/wiki/bin/view/Main/ConfigurationStory -->
+                <configurationProperties validatorClass="com.siemens.bt.jazz.services.PersonalTokenService.jazz.validator.PrivateKeyValidator">
+                    <configurationProperty
+                        accessPolicy="SENSITIVE"
+                        default=""
+                        description="Private crypto key for encryption and decryption of Pesonal Access Tokens. IMPORTANT: If you change this key, all existing data cannot be decrypted anymore!"
+                        displayableName="Private Key"
+                        name="privateKey"
+                        type="STRING"
+                        updatePolicy="NO_RESTART_REQUIRED"/>
+                </configurationProperties>
+
+                <requiredService interface="com.ibm.team.repository.common.service.IContributorService"/>
+                <requiredService interface="com.ibm.team.repository.service.IRepositoryItemService"/>
+                <requiredService interface="com.ibm.team.repository.common.service.IQueryService"/>
+                <requiredService interface="com.ibm.team.repository.service.IServerQueryService"/>
+                <requiredService interface="com.ibm.team.build.internal.common.ITeamBuildService"/>
+            </prerequisites>
+        </serviceProvider>
+    </extension>
+</plugin>
