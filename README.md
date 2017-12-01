@@ -62,7 +62,7 @@ Read the token associated to the passed in `key` for the currently logged-in use
 ```
 
 ## Contributing
-Please use the [Issue Tracker](https://github.com/jazz-community/rtc-absence-widget/issues) of this repository to report issues or suggest enhancements.
+Please use the [Issue Tracker](https://github.com/jazz-community/rtc-secure-user-property-store/issues) of this repository to report issues or suggest enhancements.
 
 For general contribution guidelines, please refer to [CONTRIBUTING.md](https://github.com/jazz-community/rtc-secure-user-property-store/blob/master/CONTRIBUTING.md)
 
