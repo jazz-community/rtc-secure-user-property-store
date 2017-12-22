@@ -27,12 +27,16 @@ public class Crypto {
     }
 
     public static String decrypt(String cipherText, String encryptionKey) throws GeneralSecurityException, UnsupportedEncodingException {
-        byte[] combinedValue = cipherText.getBytes(STRING_ENCODING);
-        byte[] iv = Arrays.copyOfRange(combinedValue, 0, 16);
-        byte[] byteCyperText = Arrays.copyOfRange(combinedValue, 16, combinedValue.length);
-        Cipher cipher = Cipher.getInstance(TRANSFORMATION, PROVIDER);
-        SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes(CHARSET), MODE);
-        cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
-        return new String(cipher.doFinal(byteCyperText), CHARSET);
+        if(cipherText != null && cipherText.length() > 0) {
+            byte[] combinedValue = cipherText.getBytes(STRING_ENCODING);
+            byte[] iv = Arrays.copyOfRange(combinedValue, 0, 16);
+            byte[] byteCyperText = Arrays.copyOfRange(combinedValue, 16, combinedValue.length);
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION, PROVIDER);
+            SecretKeySpec key = new SecretKeySpec(encryptionKey.getBytes(CHARSET), MODE);
+            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
+            return new String(cipher.doFinal(byteCyperText), CHARSET);
+        } else {
+            return "";
+        }
     }
 }
