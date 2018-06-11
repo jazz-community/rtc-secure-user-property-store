@@ -1,14 +1,14 @@
 # Secure User Property Store for RTC
-This plugin is used to store additional properties that are associated to an RTC user account in a secure manner. It is used by the [RTC Git Connector](https://github.com/jazz-community/rtc-git-connector) project to store the _Personal Access Token_ that is needed to access GitLab data. The service uses strong, tamper-proof cryptography to make sure that stored information is safe. It uses a built-in mechanism of the Jazz Platform the information directly into the database.
+This plugin is used to store additional properties that are associated to an RTC user account in a secure manner. It is used by the [RTC Git Connector](https://github.com/jazz-community/rtc-git-connector) project to store the _Personal Access Token_ that is needed to access GitLab data. The service uses strong, tamper-proof cryptography to make sure that stored information is safe. It uses a built-in mechanism of the Jazz Platform to store the information directly in the database.
 
 ## Setup Instructions
-The most convenient way to install this service is to download the current stable release from the [Releases](https://github.com/jazz-community/rtc-secure-user-property-store/releases) page. If you not already know, head over to the [RTC Git Connector](https://github.com/jazz-community/rtc-git-connector) page to learn how to install RTC plug-ins (it's always the same procedure).
+The most convenient way to install this service is to download the current stable release from the [Releases](https://github.com/jazz-community/rtc-secure-user-property-store/releases) page. If you don't already know how, head over to the [RTC Git Connector](https://github.com/jazz-community/rtc-git-connector) page to learn how to install RTC plug-ins (it's always the same procedure).
 
-Once the plug-in is installed and the server rebooted, open the **Advanced Properties** page of your server and scroll down to the following section that allows to configure this service. Specify a _16 digit_ private key that is used for encrpytion.
+Once the plug-in is installed and the server rebooted, open the **Advanced Properties** page of your server and scroll down to the following section that allows you to configure this service. Specify a _16 digit_ private key that is used for encrpytion.
 ![Work Item Bulk Mover Version 1.0.0 demonstration](https://github.com/jazz-community/rtc-secure-user-property-store/blob/master/private_key_setup_in_AdvancedProperties.PNG)
 
 Important notes:
-- Without providing a private key, the service will not wwork
+- Without providing a private key, the service will not work
 - Do not share this key with anyone except a secure password manager, you may want to keep it for restore scenarios
 - Make sure that the private key is absolutely random so that no one could guess it
 
