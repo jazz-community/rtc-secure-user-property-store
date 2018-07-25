@@ -25,7 +25,6 @@ import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 
 public final class TokenWriterService extends AbstractRestService {
-    private static final JazzLog logger = JazzLog.getLog(TokenWriterService.class);
 
     public TokenWriterService(Log log, HttpServletRequest request, HttpServletResponse response, RestRequest restRequest, TeamRawService parentService) {
         super(log, request, response, restRequest, parentService);
@@ -48,16 +47,16 @@ public final class TokenWriterService extends AbstractRestService {
             try {
                 String encryptedToken = Crypto.encrypt(token, privateKey);
                 BuildSecretsWriter.storeSecret(parentService, user, hashedKey, encryptedToken);
-                logger.info("[PTS] Token created by '" + user.getUserId() + "'");
+                log.info("[PTS] Token created by '" + user.getUserId() + "'");
                 response.setStatus(201);
             } catch (GeneralSecurityException ex) {
-                logger.error("[PTS] Token Service encryption failed for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
+                log.error("[PTS] Token Service encryption failed for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
                 response.setStatus(500);
             } catch (UnsupportedEncodingException ex) {
-                logger.error("[PTS] Token Service encryption failed due to encoding issues for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
+                log.error("[PTS] Token Service encryption failed due to encoding issues for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
                 response.setStatus(500);
             } catch (TeamRepositoryException ex) {
-                logger.error("[PTS] Problem writing to Build Secrets Store for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
+                log.error("[PTS] Problem writing to Build Secrets Store for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
                 response.setStatus(500);
             }
         } else {

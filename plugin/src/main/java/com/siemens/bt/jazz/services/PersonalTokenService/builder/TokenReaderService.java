@@ -3,7 +3,6 @@ package com.siemens.bt.jazz.services.PersonalTokenService.builder;
 import com.google.gson.JsonObject;
 import com.ibm.team.repository.common.IContributor;
 import com.ibm.team.repository.common.TeamRepositoryException;
-import com.ibm.team.repository.common.util.JazzLog;
 import com.ibm.team.repository.service.TeamRawService;
 import com.siemens.bt.jazz.services.PersonalTokenService.internal.BuildSecretsHelper;
 import com.siemens.bt.jazz.services.PersonalTokenService.internal.BuildSecretsReader;
@@ -23,8 +22,6 @@ import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 
 public class TokenReaderService extends AbstractRestService {
-    private static final JazzLog logger = JazzLog.getLog(TokenReaderService.class);
-
     public TokenReaderService(Log log, HttpServletRequest request, HttpServletResponse response, RestRequest restRequest, TeamRawService parentService) {
         super(log, request, response, restRequest, parentService);
     }
@@ -44,13 +41,13 @@ public class TokenReaderService extends AbstractRestService {
             securedValue = BuildSecretsReader.getSecretByContributor(parentService, user, hashedKey);
             userToken = Crypto.decrypt(securedValue, privateKey);
         } catch (GeneralSecurityException ex) {
-            logger.error("[PTS] Token Service decryption failed for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
+            log.error("[PTS] Token Service decryption failed for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
             response.setStatus(500);
         } catch (UnsupportedEncodingException ex) {
-            logger.error("[PTS] Token Service decryption failed due to encoding issues for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
+            log.error("[PTS] Token Service decryption failed due to encoding issues for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
             response.setStatus(500);
         } catch (TeamRepositoryException ex) {
-            logger.error("[PTS] Problem reading Build Secrets Store for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
+            log.error("[PTS] Problem reading Build Secrets Store for user '" + user.getUserId() + "'. Error message: " + ex.getMessage());
             response.setStatus(500);
         }
 
@@ -59,7 +56,7 @@ public class TokenReaderService extends AbstractRestService {
             formattedResponse.addProperty("token", userToken);
             response.getWriter().write(formattedResponse.toString());
             response.setStatus(200);
-            logger.info("[PTS] Token read for '" + user.getUserId() + "'");
+            log.info("[PTS] Token read for '" + user.getUserId() + "'");
         } else {
             response.setStatus(404);
         }
