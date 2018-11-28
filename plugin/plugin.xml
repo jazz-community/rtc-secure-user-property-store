@@ -6,12 +6,12 @@
             point="com.ibm.team.repository.common.components">
         <component
                 id="com.siemens.bt.jazz.services.PersonalTokenService"
-                name="REST service">
+                name="Secure User Property Store">
             <service
-                    name="REST Service"
+                    name="Secure User Property Store Service"
                     kind="MODELLED_REST"
                     uri="com.siemens.bt.jazz.services.PersonalTokenService.IPersonalTokenService"
-                    version="1">
+                    version="${qualifiedVersion}">
             </service>
         </component>
     </extension>
