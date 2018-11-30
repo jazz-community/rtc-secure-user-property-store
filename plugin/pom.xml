@@ -7,7 +7,23 @@
 	<parent>
 		<groupId>com.siemens.bt.jazz.services.PersonalTokenService</groupId>
 		<artifactId>com.siemens.bt.jazz.services.PersonalTokenService.parent</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>1.0.3-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>plugin.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
 </project>
